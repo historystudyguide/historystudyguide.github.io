@@ -26,7 +26,7 @@
     z-index: 0;
   }
 
-  /* Dark futuristic button, keeping original proportions */
+  /* Dark futuristic button */
   .cssbuttons-io-button {
     background: #111;
     color: #00ffe0;
@@ -83,24 +83,26 @@
     transform: scale(0.95);
   }
 
-  /* Hint box */
+  /* Centered hint box */
   .hint-box {
-    position: fixed;
-    bottom: 18px;
-    left: 18px;
-    padding: 8px 14px;
-    border-radius: 10px;
+    position: absolute;
+    top: calc(50% - 130px);
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 14px 22px;
+    border-radius: 12px;
     font-family: 'Orbitron', sans-serif;
-    font-size: 11px;
+    font-size: 16px;
     letter-spacing: 0.08em;
     text-transform: uppercase;
     color: #cbd5f5;
-    background: rgba(10, 10, 20, 0.85);
-    border: 1px solid rgba(0, 255, 224, 0.4);
-    box-shadow: 0 0 12px rgba(0, 255, 224, 0.4);
-    z-index: 2;
+    background: rgba(10, 10, 20, 0.92);
+    border: 1px solid rgba(0, 255, 224, 0.45);
+    box-shadow: 0 0 18px rgba(0, 255, 224, 0.45);
+    z-index: 3;
     pointer-events: none;
-    opacity: 0.9;
+    opacity: 1;
+    text-align: center;
   }
 
   .hint-highlight {
@@ -112,6 +114,12 @@
 
 <canvas id="bgCanvas"></canvas>
 
+<!-- Centered Hint -->
+<div class="hint-box">
+  Hint: password is <span class="hint-highlight">tinkle</span>
+</div>
+
+<!-- Button -->
 <button class="cssbuttons-io-button" id="spaceBtn">
   PLAY NOW
   <div class="icon">
@@ -121,10 +129,6 @@
     </svg>
   </div>
 </button>
-
-<div class="hint-box">
-  Hint: password is <span class="hint-highlight">tinkle</span>
-</div>
 
 <script>
 const targetURL = "https://tinklegames.github.io/redirect/codes";
