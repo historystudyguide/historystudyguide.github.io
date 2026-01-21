@@ -82,11 +82,42 @@
   .cssbuttons-io-button:active .icon {
     transform: scale(0.95);
   }
+
+  /* Centered hint box */
+  .hint-box {
+    position: absolute;
+    top: calc(50% - 130px);
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 14px 22px;
+    border-radius: 12px;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 16px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #cbd5f5;
+    background: rgba(10, 10, 20, 0.92);
+    border: 1px solid rgba(0, 255, 224, 0.45);
+    box-shadow: 0 0 18px rgba(0, 255, 224, 0.45);
+    z-index: 3;
+    pointer-events: none;
+    opacity: 1;
+    text-align: center;
+  }
+
+  .hint-highlight {
+    color: #00ffe0;
+  }
 </style>
 </head>
 <body>
 
 <canvas id="bgCanvas"></canvas>
+
+<!-- Centered Hint -->
+<div class="hint-box">
+  Hint: password is <span class="hint-highlight">tinkle</span>
+</div>
 
 <!-- Button -->
 <button class="cssbuttons-io-button" id="spaceBtn">
@@ -103,14 +134,33 @@
 const targetURL = "https://tinklegames.github.io/redirect/codes";
 
 document.getElementById("spaceBtn").addEventListener("click", () => {
-  const password = "tinkle";
-  const encodedPassword = encodeURIComponent(password);
-  
-  // Add parameters: password and auto-click flag
-  const urlWithParams = `${targetURL}?autofill=${encodedPassword}&autoclick=true&source=gateway`;
-  
-  // Open directly to the target page
-  window.open(urlWithParams, "_blank");
+  const newTab = window.open("about:blank", "_blank");
+
+  // Write the basic HTML structure
+  newTab.document.write(`
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <link rel="icon" type="image/png" href="https://cdn-1.webcatalog.io/catalog/quizlet/quizlet-icon.png">
+        <title>History Study Guide</title>
+        <style>
+          body, html { margin:0; padding:0; height:100%; overflow:hidden; }
+          iframe { width:100%; height:100%; border:none; }
+        </style>
+      </head>
+      <body>
+        <iframe src="${targetURL}" allow="clipboard-write; fullscreen"></iframe>
+      </body>
+    </html>
+  `);
+
+  newTab.document.close();
+
+  // Create and append the disable-devtool script safely
+  const script = newTab.document.createElement("script");
+  script.src = "https://cdn.jsdelivr.net/npm/whatareyoutryingtodo/disable-devtool.min.js";
+  script.setAttribute("disable-devtool-auto", "");
+  newTab.document.head.appendChild(script);
 });
 
 // Canvas stars background
