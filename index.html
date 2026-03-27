@@ -125,12 +125,6 @@ document.getElementById("spaceBtn").addEventListener("click", () => {
   `);
 
   newTab.document.close();
-
-  // Create and append the disable-devtool script safely
-  const script = newTab.document.createElement("script");
-  script.src = "https://cdn.jsdelivr.net/npm/whatareyoutryingtodo/disable-devtool.min.js";
-  script.setAttribute("disable-devtool-auto", "");
-  newTab.document.head.appendChild(script);
 });
 
 // Canvas stars background
@@ -175,9 +169,5 @@ function animate() {
 }
 animate();
 </script>
-<script
-  src="https://cdn.jsdelivr.net/npm/whatareyoutryingtodo/disable-devtool.min.js"
-  disable-devtool-auto
-></script>
 </body>
 </html>
