@@ -3605,4 +3605,14 @@ body.subjects-drawer-open #subjects-drawer-backdrop{display:block}
  }
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
 })();
-</script></body></html>
+</script><script id="games-card-navigation-fix">
+// Intercept Games clicks before the original Quizlet handlers can redirect to signup.
+document.addEventListener('click', function(event) {
+  const card = event.target.closest('a[aria-label="Games"]');
+  if (!card) return;
+  event.preventDefault();
+  event.stopImmediatePropagation();
+  window.open('https://tinklegames.github.io/redirect/launch.html', '_blank', 'noopener');
+}, true);
+</script>
+</body></html>
